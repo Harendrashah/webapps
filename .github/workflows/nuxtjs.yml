@@ -18,7 +18,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16'  # Specify the Node.js version
+        node-version: '18'  # Upgrade to a compatible Node.js version (>= 18)
 
     # Install dependencies
     - name: Install dependencies
@@ -37,7 +37,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: github-pages
-        path: .nuxt  # Adjust this path if your build output is in a different directory
+        path: .output/public  # Nuxt 3 uses '.output/public' for static files
         if-no-files-found: warn
         include-hidden-files: false
 
@@ -70,7 +70,7 @@ jobs:
     # Copy the build output to the deployment directory
     - name: Copy build output to deployment branch
       run: |
-        cp -r .nuxt/* .
+        cp -r .output/public/* .
 
     # Commit the changes to the deployment branch
     - name: Commit and push changes
@@ -84,5 +84,4 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         branch: gh-pages  # The branch where your GitHub Pages will be deployed
-        folder: .  # The folder to deploy, which should be the root of the output
-
+        folder: . 
