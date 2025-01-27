@@ -21,11 +21,5 @@ export default defineNuxtConfig({
     viewer: false, // Disable Tailwind CSS viewer in production
   },
 
-  // Generate static site
-  target: 'static',
-
-  // SPA fallback for GitHub Pages routing
-  generate: {
-    fallback: '404.html', // Ensure this for proper SPA support
-  },
+  
 });
