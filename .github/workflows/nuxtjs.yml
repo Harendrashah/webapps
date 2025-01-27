@@ -37,7 +37,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: github-pages
-        path: .output/public  # Nuxt 3 uses '.output/public' for static files
+        path: .output/public  # Ensure the build output is correct
         if-no-files-found: warn
         include-hidden-files: false
 
@@ -67,10 +67,14 @@ jobs:
       run: |
         git checkout -b gh-pages || git checkout gh-pages
 
-    # Copy the build output to the deployment directory
+    # Copy the build output to deployment directory only if it exists
     - name: Copy build output to deployment branch
       run: |
-        cp -r .output/public/* .
+        if [ -d ".output/public" ]; then
+          cp -r .output/public/* .
+        else
+          echo "No build output found, skipping deployment."
+        fi
 
     # Commit the changes to the deployment branch
     - name: Commit and push changes
