@@ -5,6 +5,10 @@ on:
     branches:
       - main  # Trigger the workflow on push to the main branch
 
+permissions:
+  contents: read  # Default permission for reading the repository
+  id-token: write  # Grant write access to the id-token for Pages deployment
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -42,8 +46,8 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
         with:
-          artifact_id: ${{ needs.build.outputs.artifact_id }}
-          pages_build_version: ${{ needs.build.outputs.pages_build_version }}
+          token: ${{ secrets.GITHUB_TOKEN }}  # Use the GITHUB_TOKEN for authentication
+          artifact_name: github-pages  # Specify the artifact name
 
     environment:
-      name: github-pages
+      name: github-pages  # Specify the environment for deployment
