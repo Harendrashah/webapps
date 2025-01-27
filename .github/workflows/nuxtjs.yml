@@ -26,14 +26,14 @@ jobs:
         run: npm install
 
       - name: Build project
-        run: npm run build  # Make sure this is the build command for your project
+        run: npm run build  # Ensure this is the correct build command for your project
 
       - name: Upload artifact
         id: build
         uses: actions/upload-artifact@v3
         with:
-          name: github-pages
-          path: ./dist  # Adjust this path if your build output is different
+          name: github-pages  # Artifact name must be the same as in the deploy step
+          path: ./dist        # Adjust this path if your build output is different
 
   deploy:
     needs: build  # Ensure the deploy job runs after the build job
@@ -47,7 +47,7 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}  # Use the GITHUB_TOKEN for authentication
-          artifact_name: github-pages  # Specify the artifact name
+          artifact_name: github-pages  # Specify the artifact name uploaded in the previous step
 
     environment:
       name: github-pages  # Specify the environment for deployment
