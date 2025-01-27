@@ -2,24 +2,30 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: false },
-  modules: [
-    '@nuxtjs/tailwindcss',
-    '@formkit/nuxt',
-  ],
+  modules: ['@nuxtjs/tailwindcss', '@formkit/nuxt'],
 
-  // Set base URL for GitHub Pages
   app: {
-    baseURL: '/webapps/', // Repository name
+    baseURL: '/webapps/', // Base URL for GitHub Pages
   },
 
-  // Include Tailwind CSS
   css: [
-    '~/assets/css/tailwind.css',
+    '~/assets/css/tailwind.css', // Include Tailwind CSS
   ],
 
   tailwindcss: {
-    viewer: false, // Disable Tailwind CSS viewer in production
+    viewer: false, // Disable Tailwind viewer in production
   },
 
-  
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
+
+  target: 'static',
+
+  generate: {
+    fallback: '404.html', // Fallback for SPA routing
+  },
 });
