@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # Specify your Node.js version
+          node-version: '18'  # Specify Node.js version 18 or higher
 
       - name: Install dependencies
         run: npm install
@@ -26,7 +26,7 @@ jobs:
 
       - name: Upload artifact
         id: build
-        uses: actions/upload-artifact@v3  # Use the updated version
+        uses: actions/upload-artifact@v3
         with:
           name: github-pages
           path: ./dist  # Adjust this path if your build output is different
@@ -46,4 +46,4 @@ jobs:
           pages_build_version: ${{ needs.build.outputs.pages_build_version }}
 
     environment:
-      name: github-pages  # Specify the environment for deployment
+      name: github-pages
