@@ -27,24 +27,16 @@ jobs:
 
       - name: Build project
         run: npm run build  # Ensure this is the correct build command for your project
-<<<<<<< HEAD
-=======
 
       - name: List contents of build folder  # Debugging step
         run: ls -R ./.output  # Adjust path to match your actual build output folder
->>>>>>> cc85f65 (first commcsj)
 
       - name: Upload artifact
         id: build
         uses: actions/upload-artifact@v3
         with:
-<<<<<<< HEAD
-          name: github-pages  # Artifact name must be the same as in the deploy step
-          path: ./dist        # Adjust this path if your build output is different
-=======
           name: github-pages
           path: ./.output  # Adjust to your actual build folder
->>>>>>> cc85f65 (first commcsj)
 
   deploy:
     needs: build  # Ensure the deploy job runs after the build job
@@ -58,11 +50,7 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}  # Use the GITHUB_TOKEN for authentication
-<<<<<<< HEAD
-          artifact_name: github-pages  # Specify the artifact name uploaded in the previous step
-=======
           artifact_name: github-pages  # Artifact name must match the upload step
->>>>>>> cc85f65 (first commcsj)
 
     environment:
       name: github-pages  # Specify the environment for deployment
