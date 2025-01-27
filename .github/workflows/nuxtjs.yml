@@ -26,7 +26,7 @@ jobs:
 
       - name: Upload artifact
         id: build
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3  # Use the updated version
         with:
           name: github-pages
           path: ./dist  # Adjust this path if your build output is different
